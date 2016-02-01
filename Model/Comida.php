@@ -12,13 +12,15 @@ class Comida {
     private $id;
     private $nombre;
     private $precio;
+    private $ingredientes;
     private $fecha;
     
     // Funcion constructor
-    public function __construct($nombre, $precio, $fecha, $id = null) {
+    public function __construct($nombre, $precio, $ingredientes, $fecha, $id = null) {
         // Asignamos los valores del constructor a los atributos
         $this->nombre = $nombre;
         $this->precio = $precio;
+        $this->ingredientes = $ingredientes;
         $this->fecha = $fecha;
         $this->id = $id;
         
@@ -43,10 +45,16 @@ class Comida {
     public function getFecha() {
         return $this->fecha;
     }
+    
+    // Funcion getIngrendientes
+    public function getIngredientes() {
+        return $this->ingredientes;
+    }
 
+    
     // Funcion setter para todos los atributos, 
     // en el caso de que no se quiera cambiar un atributo, dejar en blanco o en null
-    public function setter($nombre=null, $precio=null, $fecha=null, $id=null) {
+    public function setter($nombre=null, $precio=null, $ingredientes=null, $fecha=null, $id=null) {
         
         if ($nombre !== "" && $nombre != null) {
             $this->nombre = $nombre;
@@ -54,6 +62,10 @@ class Comida {
         
         if ($precio !== "" && $precio != null) {
             $this->precio = $precio;
+        }
+        
+        if ($ingredientes !== "" && $ingredientes != null) {
+            $this->ingredientes = $ingredientes;
         }
         
         if ($fecha !== "" && $fecha != null) {
@@ -68,11 +80,11 @@ class Comida {
     // Funcion insert que inserta un nuevo objeto a la base de datos
     public function insert() {
         // Establecemos conexion con la BD
-        $conexion = restDB::connectComidaDB();
+        $conexion = restDB::connectDB();
         
         // Sentencia Insert
-        $insert = "INSERT INTO comida (nombre, precio, fecha) VALUES (\"$this->nombre\", "
-          . "\"$this->precio\", STR_TO_DATE(\"$this->fecha\", '%d-%m-%Y'))";
+        $insert = "INSERT INTO comida (nombre, precio, ingredientes, fecha) VALUES (\"$this->nombre\", "
+          . "\"$this->precio\", \"$this->ingredientes\" ,STR_TO_DATE(\"$this->fecha\", '%d-%m-%Y'))";
         
         // Ejecutamos la sentencia
         $conexion->exec($insert);
@@ -81,7 +93,7 @@ class Comida {
     // Funcion delete que borra el objeto en la base de datos
     public function delete() {
         // Establecemos conexion con la BD
-        $conexion = restDB::connectComidaDB();
+        $conexion = restDB::connectDB();
         
         // Sentencia para borrar el objeto
         $borrado = "DELETE FROM comida WHERE id=\"".$this->id."\"";
@@ -93,10 +105,10 @@ class Comida {
     // Funcion delete que modifica el objeto en la base de datos
     public function update() {
         // Establecemos conexion con la BD
-        $conexion = restDB::connectComidaDB();
+        $conexion = restDB::connectDB();
         
         // Sentencia para modificar el objeto
-        $update = "UPDATE comida SET nombre=\"$this->nombre\", precio=\"$this->precio\", fecha=STR_TO_DATE(\"$this->fecha\", '%d-%m-%Y') WHERE id=\"$this->id\"";
+        $update = "UPDATE comida SET nombre=\"$this->nombre\", precio=\"$this->precio\", ingredientes=\"$this->ingredientes\" ,fecha=STR_TO_DATE(\"$this->fecha\", '%d-%m-%Y') WHERE id=\"$this->id\"";
         
         // Ejecutamos la sentencia
         $conexion->exec($update);
@@ -105,7 +117,7 @@ class Comida {
     // Funcion estatica de clase para seleccionar una comida por su ID, devuelve un objeto
     public static function getComidaById($id) {
         // Conectamos a la BD
-        $conexion = restDB::connectComidaDB();
+        $conexion = restDB::connectDB();
 
         // Sentencia Select
         $seleccion = "SELECT * FROM comida WHERE id=$id";
@@ -117,7 +129,7 @@ class Comida {
         $registro = $consulta->fetchObject();
 
         // Guardamos la comida
-        $comida = new Comida($registro->nombre, $registro->precio, $registro->fecha, $registro->id);
+        $comida = new Comida($registro->nombre, $registro->precio, $registro->ingredientes, $registro->fecha, $registro->id);
 
         // Devolvemos el array comida
         return $comida;   
@@ -127,7 +139,7 @@ class Comida {
     public static function getComida($orden=null, $filtro=null, $valor=null) {
 
         // Conectamos a la BD
-        $conexion = restDB::connectComidaDB();
+        $conexion = restDB::connectDB();
 
         // Si el filtro no viene vacio
         if ($filtro !== "" && $filtro !== null && $valor !== "" && $valor !== null) {
@@ -155,7 +167,7 @@ class Comida {
         // Recorremos todos los registros
         while ($registro = $consulta->fetchObject()) {
           // Creamos objetos y los metemos en el array comida
-          $comidas[] = new Comida($registro->nombre, $registro->precio, $registro->fecha, $registro->id);
+          $comidas[] = new Comida($registro->nombre, $registro->precio, $registro->ingredientes, $registro->fecha, $registro->id);
         }
 
         // Devolvemos el array comida

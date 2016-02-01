@@ -79,7 +79,7 @@ class Bebida {
     // Funcion insert que inserta un nuevo objeto a la base de datos
     public function insert() {
         // Establecemos conexion con la BD
-        $conexion = restDB::connectBebidaDB();
+        $conexion = restDB::connectDB();
         
         // Sentencia Insert
         $insert = "INSERT INTO bebida (nombre, cantidad, precio, fecha) VALUES (\"$this->nombre\", "
@@ -92,7 +92,7 @@ class Bebida {
     // Funcion delete que borra el objeto en la base de datos
     public function delete() {
         // Establecemos conexion con la BD
-        $conexion = restDB::connectBebidaDB();
+        $conexion = restDB::connectDB();
         
         // Sentencia para borrar el objeto
         $borrado = "DELETE FROM bebida WHERE id=\"".$this->id."\"";
@@ -104,7 +104,7 @@ class Bebida {
     // Funcion delete que modifica el objeto en la base de datos
     public function update() {
         // Establecemos conexion con la BD
-        $conexion = restDB::connectBebidaDB();
+        $conexion = restDB::connectDB();
         
         // Sentencia para modificar el objeto
         $update = "UPDATE bebida SET nombre=\"$this->nombre\", cantidad=\"$this->cantidad\", precio=\"$this->precio\", fecha=STR_TO_DATE(\"$this->fecha\", '%d-%m-%Y') WHERE id=\"$this->id\"";
@@ -116,7 +116,7 @@ class Bebida {
     // Funcion estatica de clase para seleccionar una bebida por su ID, devuelve un objeto
     public static function getBebidaById($id) {
         // Conectamos a la BD
-        $conexion = restDB::connectBebidaDB();
+        $conexion = restDB::connectDB();
 
         // Sentencia Select
         $seleccion = "SELECT * FROM bebida WHERE id=$id";
@@ -138,7 +138,7 @@ class Bebida {
     public static function getBebidas($orden=null, $filtro=null, $valor=null) {
 
         // Conectamos a la BD
-        $conexion = restDB::connectBebidaDB();
+        $conexion = restDB::connectDB();
 
         // Si el filtro no viene vacio
         if ($filtro !== "" && $filtro !== null && $valor !== "" && $valor !== null) {

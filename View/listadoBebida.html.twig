@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+{% block contenido %}
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-md-3">Nombre</th>
+                <th class="col-md-5">Cantidad</th>
+                <th class="col-md-2">Precio</th>
+                <th class="col-md-2"></th>
+            </tr>
+        <thead>
+        <tbody>
+        <tr><form action="../Controller/addBebida.php" method="post">
+                <td class="col-md-3 nopadding"><input class="form-control" type="text" name="addNombre" placeholder="Nombre" autofocus></td>
+                <td class="col-md-5 nopadding"><input class="form-control" type="text" name="addCantidad" placeholder="Cantidad en mL"></td>
+                <td class="col-md-2 nopadding"><input class="form-control" type="text" name="addPrecio" placeholder="Precio"></td>
+                <td class="col-md-2"><input class="btn btn-primary" type="submit" name="addSubmit" value="Añadir"></td>
+            </form>
+        </tr>
+        
+        {% for bebida in bebidas %}
+        <tr> 
+            <td class="col-md-3">{{ bebida.nombre }}</td>
+            <td class="col-md-5">{{ bebida.cantidad }}mL</td>
+            <td class="col-md-2">{{ bebida.precio }}€</td>
+            <td class="col-md-2">
+                <form class="inline" action="../Controller/bebida.php" method="post">
+                    <input class="btn btn-primary" type="submit" name="updateSubmit" value="Modificar">
+                    <input type="hidden" name="updateId" value="{{ bebida.id }}">
+                </form>
+                <form class="inline" action="../Controller/deleteBebida.php" method="post">
+                    <input class="btn btn-danger" type="submit" name="deleteSubmit" value="Borrar">
+                    <input type="hidden" name="deleteId" value="{{ bebida.id }}">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+        <tbody>
+    </table>
+</div>
+{% endblock contenido%}

@@ -1,2 +1,2 @@
 <?php
-  header("Location: Controller/index.php");
+  header("Location: Controller/comida.php");
