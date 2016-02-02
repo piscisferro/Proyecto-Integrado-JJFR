@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-02-2016 a las 00:06:18
+-- Tiempo de generación: 02-02-2016 a las 21:26:42
 -- Versión del servidor: 5.6.26
 -- Versión de PHP: 5.6.12
 
@@ -34,14 +34,18 @@ CREATE TABLE IF NOT EXISTS `bebida` (
   `precio` float NOT NULL,
   `cantidad` int(11) NOT NULL,
   `fecha` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `bebida`
 --
 
 INSERT INTO `bebida` (`id`, `nombre`, `precio`, `cantidad`, `fecha`) VALUES
-(1, 'Coca Cola', 1.3, 33, '2016-02-01');
+(1, 'Coca Cola', 1.3, 33, '2016-02-01'),
+(3, 'Pepsi-Cola', 1.3, 33, '2016-02-02'),
+(6, 'Fanta de Naranja', 1.3, 20, '2016-02-02'),
+(7, 'Caña', 1, 20, '2016-02-02'),
+(8, 'Cerveza Cruzcampo', 1.3, 33, '2016-02-02');
 
 -- --------------------------------------------------------
 
@@ -55,14 +59,17 @@ CREATE TABLE IF NOT EXISTS `comida` (
   `precio` float NOT NULL,
   `ingredientes` varchar(150) COLLATE utf8_bin NOT NULL,
   `fecha` date NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Volcado de datos para la tabla `comida`
 --
 
 INSERT INTO `comida` (`id`, `nombre`, `precio`, `ingredientes`, `fecha`) VALUES
-(1, 'Hamburguesa con Queso', 2.35, 'Hamburguesa de buey, queso, lechuga, cebolla y tomate', '2016-02-01');
+(1, 'Hamburguesa con Queso', 2.35, 'Hamburguesa de buey, queso, lechuga, cebolla y tomate', '2016-02-01'),
+(2, 'Campero de Pollo', 3.2, 'Pollo, Queso, Jamon de York, Lechuga y Tomate', '2016-02-02'),
+(3, 'Pitufo Mixto', 1.5, 'Jamon de York, Queso, Mantequilla', '2016-02-02'),
+(4, 'Campero de Atun', 3.2, 'Atun, Queso, Jamon de York, Lechuga, Tomate, Mayonesa', '2016-02-02');
 
 --
 -- Índices para tablas volcadas
@@ -88,12 +95,12 @@ ALTER TABLE `comida`
 -- AUTO_INCREMENT de la tabla `bebida`
 --
 ALTER TABLE `bebida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `comida`
 --
 ALTER TABLE `comida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
