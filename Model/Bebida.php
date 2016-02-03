@@ -125,7 +125,11 @@ class Bebida {
         $conexion = restDB::connectDB();
         
         // Sentencia para modificar el objeto
+<<<<<<< HEAD
         $update = "UPDATE bebida SET nombre=\"$this->nombre\", cantidad=\"$this->cantidad\", precio=\"$this->precio\", imagen=\"$this->imgDir\" , fecha=STR_TO_DATE(\"$this->fecha\", \"%d-%m-%Y\") WHERE id=\"$this->id\"";
+=======
+        $update = "UPDATE bebida SET nombre=\"$this->nombre\", cantidad=\"$this->cantidad\", precio=\"$this->precio\", fecha=STR_TO_DATE(\"$this->fecha\", \"%d-%m-%Y\") WHERE id=\"$this->id\"";
+>>>>>>> origin/master
         
         // Ejecutamos la sentencia y guardamos la respuesta de la BD
         $resultado = $conexion->query($update);
@@ -172,7 +176,11 @@ class Bebida {
         }
         
         // Si la hay un segundo filtro, se filtra el valor por esa columna tambien
+<<<<<<< HEAD
         if ($filtro2 !== "" && $filtro2 !== null && $valor !== null && $valor !== "") {
+=======
+        if ($filtro2 !== "" && $filtro2 !== null) {
+>>>>>>> origin/master
             $seleccion .= " OR LOWER($filtro2) LIKE LOWER('%$valor%')";
         }
         

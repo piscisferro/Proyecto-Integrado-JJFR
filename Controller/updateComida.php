@@ -13,6 +13,7 @@ if (isset($_POST["updateComida"])) {
     // Fecha actual con formato
     $fecha = date('d-m-Y');
     
+<<<<<<< HEAD
     // Gestionamos la imagen si se ha subido
     if ($_FILES["updateImagen"]["name"] !== "") {
         
@@ -37,11 +38,17 @@ if (isset($_POST["updateComida"])) {
         $imgDir = "";
     }
     
+=======
+>>>>>>> origin/master
     // Buscamos en la base de datos y guardamos el objeto que queremos modificar
     $comida = Comida::getComidaById($_POST["updateId"]);
     
     // Setter para modificar todos los atributos del objeto
+<<<<<<< HEAD
     $comida->setter($_POST["updateNombre"], $_POST["updatePrecio"], $_POST["updateIngredientes"], $imgDir, $fecha);
+=======
+    $comida->setter($_POST["updateNombre"], $_POST["updatePrecio"], $_POST["updateIngredientes"], $fecha);
+>>>>>>> origin/master
     
     var_dump($comida);
     

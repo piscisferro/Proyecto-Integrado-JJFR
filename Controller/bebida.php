@@ -36,6 +36,15 @@ if (isset($_POST["filtro2"])) {
     $filtro2 = $_POST["filtro2"];
 }
 
+<<<<<<< HEAD
+=======
+// Si se ha mandado el filtro
+if (isset($_POST["filtro2"])) {
+    // Asignamos el filtro
+    $filtro2 = $_POST["filtro2"];
+}
+
+>>>>>>> origin/master
 // Si nos llega algun mensaje de error lo guardamos en data para pasarlo a la vista
 if (isset($_GET["error"])) {
     $data["error"] = 1;
