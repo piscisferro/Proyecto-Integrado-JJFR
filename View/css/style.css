@@ -133,5 +133,43 @@ body {
 .nopadding {
     
     padding-left: 5px!important;
+        
+}
+
+.orderSelect {
+    
+    padding-top: 0!important;
+    padding-bottom: 0!important;
+    height: 28px!important;
+    
+}
+
+.tools {
+    
+    margin-bottom: 20px!important;
+    
+}
+
+.miniImg {
+    
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+}
+
+.alignImg {
+    
+    text-align: center;
+    
+}
+
+td {
+    vertical-align: middle!important;
+}
+
+#file {
+    
+    display: none!important;
+    opacity: 0!important;
     
 }

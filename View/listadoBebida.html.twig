@@ -1,41 +1,91 @@
 {% extends 'base.html.twig' %}
 {% block contenido %}
 <div class="container">
+    <section class="tools">
+        <div class="inline">
+            <form class="form-inline" action="../Controller/bebida.php" method="post">
+                <input class="form-control" type="text" name="filtroValor" placeholder="Buscar">
+                <input type="hidden" name="filtro" value="nombre">
+                <input class="btn btn-default" type="submit" value="Buscar">
+            </form>
+        </div>
+        <div class="inline pull-right">
+            <form class="form-inline" action="../Controller/bebida.php" method="post">
+                Por: 
+                <select class="form-control orderSelect" name="orden">
+                    <option value="nombre" selected>Nombre</option>
+                    <option value="precio">Precio</option>
+                </select>
+                orden: 
+                <select class="form-control orderSelect" name="dir">
+                    <option value="asc" selected>Ascendente</option>
+                    <option value="desc">Descendente</option>
+                </select>
+                {% if filtroValor is defined %}
+                <input type="hidden" name="filtro" value="nombre">
+                <input type="hidden" name="filtroValor" value="{{ filtroValor }}">
+                {% endif %}
+                <input class="btn btn-default orderSelect" type="submit" value=">">
+            </form>
+        </div>
+    </section>
+    
+    {% if error is defined %}
+    <div class="alert alert-danger">Se ha producido un error al añadir el registro.</div>
+    {% endif %}
+    {% if success is defined %}
+    <div class="alert alert-success">¡La operacion se ha completado con exito!</div>
+    {% endif %}
     <table class="table">
         <thead>
             <tr>
                 <th class="col-md-3">Nombre</th>
-                <th class="col-md-5">Cantidad</th>
-                <th class="col-md-2">Precio</th>
+                <th class="col-md-4">Cantidad</th>
+                <th class="col-md-1">Precio</th>
+                <th class="col-md-2 alignImg">Imagen</th>
                 <th class="col-md-2"></th>
             </tr>
         <thead>
         <tbody>
-        <tr><form action="../Controller/addBebida.php" method="post">
+        <tr>
+            <form action="../Controller/addBebida.php" method="post" enctype="multipart/form-data">
                 <td class="col-md-3 nopadding"><input class="form-control" type="text" name="addNombre" placeholder="Nombre" autofocus></td>
-                <td class="col-md-5 nopadding"><input class="form-control" type="text" name="addCantidad" placeholder="Cantidad en mL"></td>
-                <td class="col-md-2 nopadding"><input class="form-control" type="text" name="addPrecio" placeholder="Precio"></td>
+                <td class="col-md-4 nopadding"><input class="form-control" type="number" min="1" name="addCantidad" placeholder="Cantidad en mL"></td>
+                <td class="col-md-1 nopadding"><input class="form-control" type="number" min="1" step="any" name="addPrecio" placeholder="Precio"></td>
+                <td class="col-md-2 nopadding alignImg"><label class="btn btn-default">Examinar<input id="file" type="file" name="addImagen"></label></td>
                 <td class="col-md-2"><input class="btn btn-primary" type="submit" name="addSubmit" value="Añadir"></td>
             </form>
         </tr>
         
         {% for bebida in bebidas %}
-        <tr> 
-            <td class="col-md-3">{{ bebida.nombre }}</td>
-            <td class="col-md-5">{{ bebida.cantidad }}mL</td>
-            <td class="col-md-2">{{ bebida.precio }}€</td>
-            <td class="col-md-2">
-                <form class="inline" action="../Controller/bebida.php" method="post">
-                    <input class="btn btn-primary" type="submit" name="updateSubmit" value="Modificar">
-                    <input type="hidden" name="updateId" value="{{ bebida.id }}">
-                </form>
-                <form class="inline" action="../Controller/deleteBebida.php" method="post">
-                    <input class="btn btn-danger" type="submit" name="deleteSubmit" value="Borrar">
-                    <input type="hidden" name="deleteId" value="{{ bebida.id }}">
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
+            {% if updateId is defined and updateId == bebida.id %}
+                    <tr>
+                        <form action="../Controller/updateBebida.php" method="post" enctype="multipart/form-data">
+                            <td class="col-md-3 nopadding"><input class="form-control" type="text" name="updateNombre" placeholder="{{ bebida.nombre}}"></td>
+                            <td class="col-md-4 nopadding"><input class="form-control" type="number" min="1" name="updateCantidad" placeholder="{{ bebida.cantidad }}"></td>
+                            <td class="col-md-1 nopadding"><input class="form-control" type="number" min="1" step="any" name="updatePrecio" placeholder="{{ bebida.precio }}"></td>
+                            <td class="col-md-2 nopadding alignImg"><label class="btn btn-default">Examinar<input id="file" type="file" name="updateImagen"></label></td>                            <td class="col-md-2"><input type="hidden" name="defaultImg" value="{{ bebida.imgDir}}"><input type="hidden" name="updateId" value="{{ bebida.id}}"><input class="btn btn-primary" type="submit" name="updateBebida" value="Modificar"></td>
+                        </form>
+                    </tr>
+            {% else %}
+                <tr> 
+                    <td class="col-md-3">{{ bebida.nombre }}</td>
+                    <td class="col-md-4">{{ bebida.cantidad }} ml</td>
+                    <td class="col-md-1">{{ bebida.precio }} €</td>
+                    <td class="col-md-2 alignImg"><img class="miniImg" src="{{ bebida.imgDir }}"></td>
+                    <td class="col-md-2">
+                        <form class="inline" action="../Controller/bebida.php" method="post">
+                            <input class="btn btn-primary" type="submit" name="updateSubmit" value="Modificar">
+                            <input type="hidden" name="updateId" value="{{ bebida.id }}">
+                        </form>
+                        <form class="inline" action="../Controller/deleteBebida.php" method="post">
+                            <input class="btn btn-danger" type="submit" name="deleteSubmit" value="Borrar">
+                            <input type="hidden" name="deleteId" value="{{ bebida.id }}">
+                        </form>
+                    </td>
+                </tr> 
+            {% endif %}
+            {% endfor %}
         <tbody>
     </table>
 </div>
