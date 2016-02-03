@@ -22,14 +22,11 @@
                     <option value="asc" selected>Ascendente</option>
                     <option value="desc">Descendente</option>
                 </select>
-<<<<<<< HEAD
                 {% if filtroValor is defined %}
                 <input type="hidden" name="filtro" value="nombre">
                 <input type="hidden" name="filtroValor" value="{{ filtroValor }}">
                 <input type="hidden" name="filtro2" value="ingredientes">
                 {% endif %}
-=======
->>>>>>> origin/master
                 <input class="btn btn-default orderSelect" type="submit" value=">">
             </form>
         </div>
@@ -52,51 +49,31 @@
         <thead>
         <tbody>
         <tr>
-<<<<<<< HEAD
             <form action="../Controller/addComida.php" method="post" enctype="multipart/form-data">
                 <td class="col-md-3 nopadding"><input class="form-control" type="text" name="addNombre" placeholder="Nombre" autofocus required></td>
                 <td class="col-md-4 nopadding"><input class="form-control" type="text" name="addIngredientes" placeholder="Ingredientes"></td>
                 <td class="col-md-1 nopadding"><input class="form-control" type="number" min="1" step="any" name="addPrecio" placeholder="Precio" required></td>
                 <td class="col-md-2 nopadding alignImg"><label class="btn btn-default">Examinar<input id="file" type="file" name="addImagen"></label></td>
-=======
-            <form action="../Controller/addComida.php" method="post">
-                <td class="col-md-3 nopadding"><input class="form-control" type="text" name="addNombre" placeholder="Nombre" autofocus required></td>
-                <td class="col-md-5 nopadding"><input class="form-control" type="text" name="addIngredientes" placeholder="Ingredientes"></td>
-                <td class="col-md-2 nopadding"><input class="form-control" type="number" min="1" step="any" name="addPrecio" placeholder="Precio" required></td>
->>>>>>> origin/master
                 <td class="col-md-2"><input class="btn btn-primary" type="submit" name="addSubmit" value="Añadir"></td>
             </form>
         </tr>
         {% for comida in comida %}
             {% if updateId is defined and updateId == comida.id %}
                     <tr>
-<<<<<<< HEAD
                         <form action="../Controller/updateComida.php" method="post" enctype="multipart/form-data">
                             <td class="col-md-3 nopadding"><input class="form-control" type="text" name="updateNombre" placeholder="{{ comida.nombre}}"></td>
                             <td class="col-md-4 nopadding"><input class="form-control" type="text" name="updateIngredientes" placeholder="{{ comida.ingredientes }}"></td>
                             <td class="col-md-1 nopadding"><input class="form-control" type="number" min="1" step="any" name="updatePrecio" placeholder="{{ comida.precio }}"></td>
                             <td class="col-md-2 nopadding alignImg"><label class="btn btn-default">Examinar<input id="file" type="file" name="updateImagen"></label></td>
                             <td class="col-md-2"><input type="hidden" name="defaultImg" value="{{ comida.imgDir}}"><input type="hidden" name="updateId" value="{{ comida.id}}"><input class="btn btn-primary" type="submit" name="updateComida" value="Modificar"></td>
-=======
-                        <form action="../Controller/updateComida.php" method="post">
-                            <td class="col-md-3 nopadding"><input class="form-control" type="text" name="updateNombre" placeholder="{{ comida.nombre}}"></td>
-                            <td class="col-md-5 nopadding"><input class="form-control" type="text" name="updateIngredientes" placeholder="{{ comida.ingredientes }}"></td>
-                            <td class="col-md-2 nopadding"><input class="form-control" type="nomber" min="1" step="any" name="updatePrecio" placeholder="{{ comida.precio }}"></td>
-                            <td class="col-md-2"><input type="hidden" name="updateId" value="{{ comida.id}}"><input class="btn btn-primary" type="submit" name="updateComida" value="Modificar"></td>
->>>>>>> origin/master
                         </form>
                     </tr>
             {% else %}
                 <tr> 
                     <td class="col-md-3">{{ comida.nombre }}</td>
-<<<<<<< HEAD
                     <td class="col-md-4">{{ comida.ingredientes }}</td>
                     <td class="col-md-1">{{ comida.precio }} €</td>
                     <td class="col-md-2 alignImg"><img class="miniImg" src="{{ comida.imgDir }}"></td>
-=======
-                    <td class="col-md-5">{{ comida.ingredientes }}</td>
-                    <td class="col-md-2">{{ comida.precio }} €</td>
->>>>>>> origin/master
                     <td class="col-md-2">
                         <form class="inline" action="../Controller/comida.php" method="post">
                             <input class="btn btn-primary" type="submit" name="updateSubmit" value="Modificar">

@@ -62,11 +62,7 @@ class Comida {
     
     // Funcion setter para todos los atributos, 
     // en el caso de que no se quiera cambiar un atributo, dejar en blanco o en null
-<<<<<<< HEAD
     public function setter($nombre=null, $precio=null, $ingredientes=null, $imgDir=null, $fecha=null) {
-=======
-    public function setter($nombre=null, $precio=null, $ingredientes=null, $fecha=null) {
->>>>>>> origin/master
         
         if ($nombre !== "" && $nombre != null) {
             $this->nombre = $nombre;
@@ -83,13 +79,10 @@ class Comida {
         if ($imgDir !== "" && $imgDir !== null) {
             $this->imgDir = $imgDir;
         }
-<<<<<<< HEAD
         
         if ($fecha !== "" && $fecha != null) {
             $this->fecha = $fecha;
         }
-=======
->>>>>>> origin/master
     }
     
     // Funcion insert que inserta un nuevo objeto a la base de datos
@@ -129,19 +122,11 @@ class Comida {
         $conexion = restDB::connectDB();
         
         // Sentencia para modificar el objeto
-<<<<<<< HEAD
         $update = "UPDATE comida SET nombre=\"$this->nombre\", precio=\"$this->precio\", ingredientes=\"$this->ingredientes\", imagen=\"$this->imgDir\" ,fecha=STR_TO_DATE(\"$this->fecha\", \"%d-%m-%Y\") WHERE id=\"$this->id\"";
         
         // Ejecutamos la sentencia y guardamos la respuesta de la BD
         $resultado = $conexion->query($update);
         
-=======
-        $update = "UPDATE comida SET nombre=\"$this->nombre\", precio=\"$this->precio\", ingredientes=\"$this->ingredientes\", fecha=STR_TO_DATE(\"$this->fecha\", \"%d-%m-%Y\") WHERE id=\"$this->id\"";
-        
-        // Ejecutamos la sentencia y guardamos la respuesta de la BD
-        $resultado = $conexion->query($update);
-        
->>>>>>> origin/master
         // Devolvemos la respuesta de la BD
         return $resultado;
     }
@@ -185,11 +170,7 @@ class Comida {
         }
         
         // Si la hay un segundo filtro, se filtra el valor por esa columna tambien
-<<<<<<< HEAD
         if ($filtro2 !== "" && $filtro2 !== null && $valor !== null && $valor !== "") {
-=======
-        if ($filtro2 !== "" && $filtro2 !== null) {
->>>>>>> origin/master
             $seleccion .= " OR LOWER($filtro2) LIKE LOWER('%$valor%')";
         }
         
