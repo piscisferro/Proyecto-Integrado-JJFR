@@ -1,0 +1,60 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-md-3">Nombre</th>
+            <th class="col-md-4">Cantidad</th>
+            <th class="col-md-1">Precio</th>
+            <th class="col-md-2 alignImg">Imagen</th>
+            <th class="col-md-2"></th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr id="Bebida{{bebida.id}}">
+        <form id="addForm" data-origin="{{origin}}">
+            <td class="col-md-3 nopadding"><input form="addForm" class="form-control" type="text" name="addNombre" placeholder="Nombre" minlength="2" autofocus required></td>
+            <td class="col-md-4 nopadding"><input form="addForm" class="form-control" type="number" min="1" name="addCantidad" placeholder="Cantidad en mL"></td>
+            <td class="col-md-1 nopadding"><input form="addForm" class="form-control" type="number" min="1" step="any" name="addPrecio" placeholder="Precio"></td>
+            <td class="col-md-2 nopadding alignImg"><label class="btn btn-default">Examinar<input form="addForm" type="file" name="addImagen" accept="image/*"></label></td>
+            <td class="col-md-2"><input form="addForm" class="btn btn-primary" type="submit" name="addSubmit" value="Añadir"></td>
+        </form>
+    </tr>
+    {% for bebida in bebidas %}
+        {% if updateId is defined and updateId == bebida.id %}
+            <tr id="Bebida{{bebida.id}}">
+                <form id="updateForm" data-origin="{{origin}}">
+                    <td class="col-md-3 nopadding"><input form="updateForm" class="form-control" type="text" name="updateNombre" placeholder="{{ bebida.nombre}}"></td>
+                    <td class="col-md-4 nopadding"><input form="updateForm" class="form-control" type="number" min="1" name="updateCantidad" placeholder="{{ bebida.cantidad }}"></td>
+                    <td class="col-md-1 nopadding"><input form="updateForm" class="form-control" type="number" min="1" step="any" name="updatePrecio" placeholder="{{ bebida.precio }}"></td>
+                    <td class="col-md-2 nopadding alignImg"><label class="btn btn-default">Examinar<input form="updateForm" type="file" name="updateImagen" accept="image/*"></label></td>
+                    <td class="col-md-2">
+                        <input form="updateForm" type="hidden" name="defaultImg" value="{{ bebida.imgDir}}">
+                        <input form="updateForm" type="hidden" name="updateId" value="{{ bebida.id}}">
+                        <input form="updateForm" class="btn btn-primary" type="submit" name="updateBebida" value="Modificar">
+                        <button class="cancelar btn btn-warning" data-origin="{{origin}}">Cancelar</button>
+                    </td>
+                </form>
+            </tr>
+        {% else %}
+            <tr id="Bebida{{bebida.id}}"> 
+                <td class="col-md-3">{{ bebida.nombre }}</td>
+                <td class="col-md-4">{{ bebida.cantidad }} ml</td>
+                <td class="col-md-1">{{ bebida.precio }} €</td>
+                <td class="col-md-2 alignImg"><img class="miniImg" src="{{ bebida.imgDir }}"></td>
+                <td class="col-md-2">
+                   <button class="btn btn-primary modificar" data-origin="{{ origin }}" data-id="{{ bebida.id }}">Modificar</button>
+                   <button class="btn btn-danger borrar" data-origin="{{ origin }}" data-id="{{ bebida.id }}">Borrar</button>
+                </td>
+            </tr> 
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+<div class="contenedorPaginas">
+    <div class="paginas">
+        {% if paginaPrimera is defined %}<a class="pagina" data-origin="{{origin}}" data-pagina="{{paginaPrimera}}">Primera</a>{% endif %} 
+        {% if paginaAnterior is defined %}<a class="pagina" data-origin="{{origin}}" data-pagina="{{paginaAnterior}}">{{ paginaAnterior + 1 }}</a>{% endif %}
+        {{ paginaActual + 1 }}
+        {% if paginaSiguiente is defined %}<a class="pagina" data-origin="{{origin}}" data-pagina="{{paginaSiguiente}}">{{ paginaSiguiente + 1 }}</a>{% endif %}
+        {% if paginaUltima is defined %}<a class="pagina" data-origin="{{origin}}" data-pagina="{{paginaUltima}}">Ultima</a>{% endif %}
+    </div>
+</div>
