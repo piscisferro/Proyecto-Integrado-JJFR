@@ -223,8 +223,6 @@ $(document).ready(function iniciar() {
         debug: true,
         submitHandler: function(form) {
 
-            console.log("yijjaaaaa");
-            
             origen = $("#addForm").data("origin"); 
 
             datos = new FormData(form);
