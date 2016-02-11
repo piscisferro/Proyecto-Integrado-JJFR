@@ -14,7 +14,7 @@ if (isset($_POST["updateComida"])) {
     $fecha = date('d-m-Y');
     
     // Gestionamos la imagen si se ha subido
-    if ($_FILES["updateImagen"]["name"] !== "") {
+    if (isset($_FILES["updateImagen"]["name"]) && $_FILES["updateImagen"]["name"] !== "") {
         
         // Borramos la imagen del servidor
         unlink("../View/Images/" . $_POST['defaultImg']);
@@ -36,12 +36,18 @@ if (isset($_POST["updateComida"])) {
         // Mandamos la direccion vacio para evitar que haga cambios en la BD
         $imgDir = "";
     }
+	
+		if ($_POST["updatePrecio"] === "") {
+	
+		$precio = 0;
+	
+	}
     
     // Buscamos en la base de datos y guardamos el objeto que queremos modificar
     $comida = Comida::getComidaById($_POST["updateId"]);
     
     // Setter para modificar todos los atributos del objeto
-    $comida->setter($_POST["updateNombre"], $_POST["updatePrecio"], $_POST["updateIngredientes"], $imgDir, $fecha);
+    $comida->setter($_POST["updateNombre"], $precio, $_POST["updateIngredientes"], $imgDir, $fecha);
     
     // Recogemos la respuesta de la BD
     $resultado = $comida->update();

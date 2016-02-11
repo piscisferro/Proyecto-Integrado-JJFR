@@ -14,7 +14,7 @@ if (isset($_POST["updateBebida"])) {
     $fecha = date('d-m-Y');
     
     // Gestionamos la imagen si se ha subido
-    if ($_FILES["updateImagen"]["name"] !== "") {
+    if (isset($_FILES["updateImagen"]["name"]) && $_FILES["updateImagen"]["name"] !== "") {
         
         // Borramos la imagen del servidor
         unlink("../View/Images/" . $_POST['defaultImg']);
@@ -36,12 +36,24 @@ if (isset($_POST["updateBebida"])) {
         // Mandamos la direccion vacio para evitar que haga cambios en la BD
         $imgDir = "";
     }
+	
+	if ($_POST["updatePrecio"] === "") {
+	
+		$precio = 0;
+	
+	}
+	
+	if ($_POST["updateCantidad"] === "") {
+	
+		$cantidad = 0;
+	
+	}
     
     // Buscamos en la base de datos y guardamos el objeto que queremos modificar
     $bebida = Bebida::getBebidaById($_POST["updateId"]);
     
     // Setter para modificar todos los atributos del objeto
-    $bebida->setter($_POST["updateNombre"], $_POST["updatePrecio"], $_POST["updateCantidad"], $imgDir, $fecha);
+    $bebida->setter($_POST["updateNombre"], $precio, $cantidad, $imgDir, $fecha);
     
     // Recogemos la respuesta de la BD
     $resultado = $bebida->update();

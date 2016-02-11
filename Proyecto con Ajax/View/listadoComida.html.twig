@@ -1,4 +1,13 @@
-<table class="table">
+<form id="addForm" form="addForm" data-origin="{{origin}}" action="" method="post" novalidate>
+    <input form="addForm" class="form-control" type="text" name="addNombre" placeholder="Nombre" autofocus required>
+    <input form="addForm" class="form-control" type="text" name="addIngredientes" placeholder="Ingredientes">
+    <input form="addForm" class="form-control" type="number" min="1" step="any" name="addPrecio" placeholder="Precio">
+    <label class="btn btn-default">Examinar<input form="addForm" type="file" name="addImagen" accept="image/*"></label>
+    <input form="addForm" id="addSubmit" class="btn btn-primary" type="submit" name="addSubmit" value="Añadir">
+</form>
+   
+
+   <table class="table">
     <thead>
         <tr>
             <th class="col-md-3">Nombre</th>
@@ -10,12 +19,16 @@
     </thead>
     <tbody>
     <tr id="Comida{{comida.id}}">
-        <form id="addForm" data-origin="{{origin}}" method="post"></form>
+       
+       
+       
+       <!--
+        <form id="addForm" form="addForm" data-origin="{{origin}}" action="" method="post" novalidate></form>
             <td class="col-md-3 nopadding"><input form="addForm" class="form-control" type="text" name="addNombre" placeholder="Nombre" autofocus required></td>
             <td class="col-md-4 nopadding"><input form="addForm" class="form-control" type="text" name="addIngredientes" placeholder="Ingredientes"></td>
             <td class="col-md-1 nopadding"><input form="addForm" class="form-control" type="number" min="1" step="any" name="addPrecio" placeholder="Precio"></td>
-            <td class="col-md-2 nopadding alignImg"><label class="btn btn-default" for="addImagen">Examinar<input form="addForm" type="file" name="addImagen" accept="image/*"></label></td>
-            <td class="col-md-2"><input form="addForm" class="btn btn-primary" type="submit" name="addSubmit" value="Añadir"></td>
+            <td class="col-md-2 nopadding alignImg"><label class="btn btn-default">Examinar<input form="addForm" type="file" name="addImagen" accept="image/*"></label></td>
+            <td class="col-md-2"><input form="addForm" id="addSubmit" class="btn btn-primary" type="submit" name="addSubmit" value="Añadir"></td>-->
         
     </tr>
     {% for comida in comida %}
@@ -25,7 +38,7 @@
                     <td class="col-md-3 nopadding"><input form="updateForm" class="form-control" name="updateNombre" type="text" placeholder="{{ comida.nombre}}"></td>
                     <td class="col-md-4 nopadding"><input form="updateForm" name="updateIngredientes" class="form-control" type="text" placeholder="{{ comida.ingredientes }}"></td>
                     <td class="col-md-1 nopadding"><input form="updateForm" name="updatePrecio" class="form-control" type="number" min="1" step="any" placeholder="{{ comida.precio }}"></td>
-                    <td class="col-md-2 nopadding alignImg"><label class="btn btn-default" for="updateImagen">Examinar<input form="updateForm" name="updateImagen" type="file" accept="image/*"></label></td>
+                    <td class="col-md-2 nopadding alignImg"><label class="btn btn-default">Examinar<input form="updateForm" name="updateImagen" type="file" accept="image/*"></label></td>
                     <td class="col-md-2">
                         <input form="updateForm" type="hidden" name="defaultImg" value="{{ comida.imgDir }}">
                         <input form="updateForm" type="hidden" name="updateId" value="{{ comida.id }}">

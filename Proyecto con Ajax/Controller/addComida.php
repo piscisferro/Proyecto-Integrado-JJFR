@@ -8,12 +8,13 @@ Twig_Autoloader::register();
 $loader = new Twig_Loader_Filesystem(__DIR__.'/../View');
 $twig = new Twig_Environment($loader); 
 
+
 if (isset($_POST["addSubmit"])) {
     
     // Fecha actual con formato
     $fecha = date('d-m-Y');
     
-    if ($_FILES["addImagen"]["name"] !== "") {
+    if (isset($_FILES["addImagen"]["name"]) && $_FILES["addImagen"]["name"]  !== "") {
     
     // Le damos un nombre nuevo a la imagen
     $imgName = "img" . time();
@@ -32,20 +33,27 @@ if (isset($_POST["addSubmit"])) {
         $imgDir = "";
     }
     
+	if ($_POST["addPrecio"] === "") {
+	
+		$precio = 0;
+	
+	}
+	
     // Creamos el objeto que insertaremos
-    $comida = new Comida($_POST["addNombre"], $_POST["addPrecio"], $_POST["addIngredientes"], $imgDir, $fecha);
+    $comida = new Comida($_POST["addNombre"], $precio = 0, $_POST["addIngredientes"], $imgDir, $fecha);
     
     // Recogemos la respuesta de la BD
     $resultado = $comida->insert();
     
     if ($resultado == false) {
-        header("Location: comida.php?error=1");
+        echo "error";
     } else {
-        header("Location: comida.php?success=1");
+        echo "success";
     }
     
 } else {
     
-    header("Location: comida.php?error=1");
+    echo "error";
     
 }
+

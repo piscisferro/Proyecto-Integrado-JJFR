@@ -13,7 +13,7 @@ if (isset($_POST["addSubmit"])) {
     // Fecha actual con formato
     $fecha = date('d-m-Y');
     
-    if ($_FILES["addImagen"]["name"] !== "") {
+    if (isset($_FILES["addImagen"]["name"]) && $_FILES["addImagen"]["name"]  !== "") {
     
         // Le damos un nombre nuevo a la imagen
         $imgName = "img" . time();
@@ -31,22 +31,34 @@ if (isset($_POST["addSubmit"])) {
     } else {  
         $imgDir = ""; 
     }
+	
+	if ($_POST["addPrecio"] === "") {
+	
+		$precio = 0;
+	
+	}
+	
+	if ($_POST["addCantidad"] === "") {
+	
+		$cantidad = 0;
+	
+	}
     
     // Creamos el objeto que insertaremos
-    $bebida = new Bebida($_POST["addNombre"], $_POST["addPrecio"], $_POST["addCantidad"], $imgDir,  $fecha);
+    $bebida = new Bebida($_POST["addNombre"], $precio, $cantidad, $imgDir,  $fecha);
     
     // Recogemos la respuesta de la BD
     $resultado = $bebida->insert();
     
     
     if ($resultado == false) {
-        header("Location: bebida.php?error=1");
+        echo "error";
     } else {
-        header("Location: bebida.php?success=1");
-    } 
+        echo "success";
+    }
     
 } else {
     
-    header("Location: bebida.php?error=1");
+    echo "error";
     
 }

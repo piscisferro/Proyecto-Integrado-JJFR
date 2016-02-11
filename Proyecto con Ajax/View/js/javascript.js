@@ -126,7 +126,7 @@ $(document).ready(function iniciar() {
             }).done(function (data) {
                 
                 var resultado = data;
-                origen.toLowerCase();
+                origen = origen.toLowerCase();
                 
                 $.post("../Controller/" + origen + ".php", { ajaxRe: true }, function(data) {
                     $("#contenido").html(data);
@@ -209,7 +209,7 @@ $(document).ready(function iniciar() {
         rules: {
             addNombre: {
                 required: true,
-                minlength: 2
+                minlength: 4
             }
         },
         
@@ -218,48 +218,52 @@ $(document).ready(function iniciar() {
                 required: "Se requiere este campo",
                 minlength: "Minimo de 2 caracteres"
             }
-        },
-        
-        debug: true,
-        submitHandler: function(form) {
-
-            origen = $("#addForm").data("origin"); 
-
-            datos = new FormData(form);
-
-
-            $.ajax({
-                url: "../Controller/add" + origen + ".php",
-                data: datos,
-                contentType: false,
-                processData: false,
-                type: 'POST',   
-            }).done(function (data) {
-
-                var resultado = data;
-
-                origen.toLowerCase();
-
-                $.post("../Controller/" + origen + ".php", { ajaxRe: true }, function(data) {
-                    $("#contenido").html(data);
-                    iniciar();
-
-                    $("#success").hide();
-                    $("#error").hide();
-
-                    if(resultado == "error") {
-                        $("#error").slideDown(200);
-                    } else {
-                        $("#success").slideDown(200);
-                    }
-                });
-            });
         }
-    });
+	});
+		
+		
     
-    
-    
-    
+	$("#addForm").submit(function(e){
+	
+        e.preventDefault();
+        
+		origen = $("#addForm").data("origin"); 
+		
+		if ($("#addForm").valid()) {
+
+			datos = new FormData(this);
+		
+			$.ajax({
+				url: "../Controller/add" + origen + ".php",
+				data: datos,
+				contentType: false,
+				processData: false,
+				type: 'POST',
+			}).done(function (data) {
+
+				var resultado = data;
+
+				origen = origen.toLowerCase();
+
+				$.post("../Controller/" + origen + ".php", { ajaxRe: true }, function(data) {
+					$("#contenido").html(data);
+					iniciar();
+
+					$("#success").hide();
+					$("#error").hide();
+
+					if(resultado == "error") {
+						$("#error").slideDown(200);
+					} else {
+						$("#success").slideDown(200);
+					}
+				});
+			});
+		}
+	
+	
+	});
+	
     //////////////////////////////////////
     /////       PAGINACION          //////
     //////////////////////////////////////
